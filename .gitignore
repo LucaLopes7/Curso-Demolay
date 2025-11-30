@@ -1,0 +1,9 @@
+# Arquivos e diretórios de ambiente Node.js
+/node_modules
+
+# Arquivo de variáveis de ambiente secretas
+.env
+
+# Logs e arquivos temporários (se houver)
+npm-debug.log*
+.DS_Store

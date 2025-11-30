@@ -1,0 +1,344 @@
+/* ======================================= */
+/* 0. RESET E VARIÁVEIS GLOBAIS            */
+/* ======================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* CORES DESTAQUE (Preto, Vermelho e Amarelo Ouro) */
+:root {
+    --primary-color: #e31837; /* Vermelho Impacto (Destaque Principal) */
+    --accent-color: #ffc300; /* Amarelo Ouro (Acento Secundário) */
+    --dark-bg: #000000; /* Preto Absoluto */
+    --card-bg: #1a1a1a; /* Fundo do Cartão (Preto mais suave) */
+    --light-text: #f0f0f0; /* Texto Claro */
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* ======================================= */
+/* 1. HEADER / BARRA DE NAVEGAÇÃO          */
+/* ======================================= */
+#main-header {
+    background: var(--dark-bg);
+    color: var(--light-text);
+    padding: 15px 0;
+    border-bottom: 3px solid var(--primary-color); /* Linha Vermelha de destaque */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: box-shadow 0.3s ease;
+}
+
+#main-header.scrolled {
+    /* Estilo adicionado via JavaScript ao rolar */
+    box-shadow: 0 4px 15px rgba(255, 195, 0, 0.2); /* Sombra Amarela */
+}
+
+#main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent-color); /* Amarelo Ouro */
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+.logo-centered {
+    /* Ocupa toda a largura do container */
+    width: 100%; 
+    /* Centraliza o texto */
+    text-align: center; 
+    
+    /* Estilos visuais */
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent-color); /* Amarelo Ouro */
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+
+/* Garante que o container do cabeçalho na página inicial use o novo estilo de centralização */
+/* Se a navegação não existe no index.html, podemos forçar a centralização do container */
+/* (Este é um ajuste de compatibilidade, se houver problemas de alinhamento) */
+#main-header:has( > .container > .logo-centered) .container {
+    justify-content: center;
+}
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li a {
+    color: var(--light-text);
+    text-decoration: none;
+    padding: 8px 15px;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: var(--primary-color); /* Vermelho no hover */
+}
+
+/* BOTÃO DE AÇÃO (CTA) NA HEADER */
+.cta-button {
+    background: var(--primary-color); /* Vermelho */
+    color: var(--light-text) !important;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 700;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-left: 20px;
+    border: none;
+    text-transform: uppercase;
+}
+
+.cta-button:hover {
+    background: #c20f2b; /* Vermelho um pouco mais escuro */
+    transform: scale(1.05);
+}
+
+/* ======================================= */
+/* 2. SEÇÃO PRINCIPAL / HERO SECTION       */
+/* ======================================= */
+#hero-section {
+    /* Substitua com sua imagem de fundo DeMolay */
+    background: url('de_molay_hero_bg.jpg') no-repeat center center/cover;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+#hero-section::before {
+    /* Overlay escuro de alto contraste */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 1;
+}
+
+#hero-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+#hero-section h1 {
+    font-size: 4rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: var(--accent-color); /* Amarelo Ouro no H1 */
+    text-transform: uppercase;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: #ccc;
+    font-style: italic;
+}
+
+/* CTA PRINCIPAL (BOTÃO GRANDE) */
+.cta-primary {
+    display: inline-block;
+    background: var(--primary-color); /* Vermelho */
+    color: var(--light-text);
+    padding: 18px 40px;
+    font-size: 1.4rem;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.3s, transform 0.2s;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.cta-primary:hover {
+    background: #c20f2b;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(227, 24, 55, 0.5); /* Sombra Vermelha */
+}
+
+.small-text {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* ======================================= */
+/* 3. SEÇÃO DE MÓDULOS (ACORDION VERTICAL) */
+/* ======================================= */
+.section-padding {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.section-padding h2 {
+    font-size: 3rem;
+    margin-bottom: 60px;
+    color: var(--primary-color); /* Vermelho */
+    text-transform: uppercase;
+}
+
+/* NOVO: Estilo para empilhar os módulos verticalmente e centralizá-los */
+.module-list {
+    margin: 0 auto; 
+    max-width: 800px; /* Limita a largura */
+}
+
+.module-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    padding: 0;
+    overflow: hidden;
+    margin-bottom: 20px; /* Espaço entre os cartões */
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.module-card:hover {
+    box-shadow: 0 8px 20px rgba(227, 24, 55, 0.3); /* Sombra vermelha sutil */
+    transform: translateY(-2px);
+}
+
+.module-header {
+    background: #1a1a1a;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 5px solid var(--accent-color); /* Linha amarela na parte superior */
+    transition: background 0.3s;
+}
+
+.module-header h3 {
+    margin: 0;
+    color: var(--light-text);
+    font-size: 1.6rem;
+}
+
+.expand-icon {
+    font-size: 2rem;
+    font-weight: 300;
+    transition: transform 0.3s;
+    color: var(--primary-color);
+}
+
+/* CONTEÚDO OCULTO: Inicia com altura zero e invisível */
+.module-content {
+    max-height: 0; 
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out, visibility 0.5s step-end; 
+    padding: 0 30px; 
+    background: #0d0d0d;
+    text-align: left;
+    visibility: hidden; /* CRÍTICO: Esconde completamente o elemento */
+}
+
+/* CLASSE ATIVA (ABERTA): Garante a expansão e visibilidade */
+.module-card.active .module-content {
+    max-height: 2000px;
+    padding: 30px;
+    visibility: visible; 
+    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out, visibility 0.5s step-start; /* CRÍTICO: Transição de visibilidade */
+}
+
+.module-card.active .expand-icon {
+    transform: rotate(45deg); 
+}
+
+/* Estilo para o container de vídeo (Responsividade 16:9) */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; 
+    height: 0;
+    overflow: hidden;
+    margin-top: 20px;
+    margin-bottom: 20px; /* Adicionado espaço para baixo do vídeo */
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+/* ======================================= */
+/* 4. RODAPÉ PROFISSIONAL                  */
+/* ======================================= */
+#main-footer {
+    background: #000;
+    color: #666;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9rem;
+    border-top: 1px solid #333;
+}
+
+#main-footer a {
+    color: #666;
+    text-decoration: none;
+}
+
+#main-footer a:hover {
+    color: var(--primary-color); 
+}
+
+
+/* ======================================= */
+/* 5. RESPONSIVIDADE (MOBILE FIRST)        */
+/* ======================================= */
+@media (max-width: 768px) {
+    /* Header e Navegação */
+    #main-header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav ul {
+        margin-top: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .cta-button {
+        margin-top: 10px;
+        margin-left: 0;
+    }
+
+    /* Módulos */
+    .section-padding h2 {
+        font-size: 2rem;
+        margin-bottom: 40px;
+    }
+    
+    /* REMOVIDO: Regras de grid desnecessárias para o layout vertical */
+}

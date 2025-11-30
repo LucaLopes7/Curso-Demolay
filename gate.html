@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso Restrito - Palavra de Emulação</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ... (Estilos CSS) ... */
+        #gate-section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: var(--dark-bg);
+        }
+        .gate-box {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 500px;
+            box-shadow: 0 0 30px rgba(227, 24, 55, 0.3);
+        }
+        .gate-box h2 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        .gate-box input[type="password"] { /* Alterado para type="password" para ocultar a digitação */
+            width: 80%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #333;
+            border-radius: 5px;
+            background: #222;
+            color: var(--light-text);
+            font-size: 1.1rem;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        .gate-box button {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: 700;
+        }
+        .gate-box button:hover {
+            background: #c20f2b;
+        }
+        /* ... (Fim dos Estilos CSS) ... */
+    </style>
+</head>
+<body>
+
+    <section id="gate-section">
+        <div class="gate-box">
+            <p class="logo">Curso Iniciático</p>
+            <h2>Verificação de Acesso</h2>
+            <p style="color: #ccc; margin-bottom: 20px;">Para ter acesso aos módulos, responda à Palavra de Emulação:</p>
+            
+            <form action="/login" method="POST">
+                <input type="password" id="emulationWord" name="emulationWord" placeholder="Digite a Palavra" required>
+                
+                <button type="submit">Prosseguir</button>
+            </form>
+
+            <p id="message" style="color: var(--accent-color); margin-top: 15px;"></p>
+        </div>
+    </section>
+
+    <script>
+    // NOVO SCRIPT: Apenas para mostrar a mensagem de erro do servidor
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const errorMessage = document.getElementById('message');
+        
+        if (urlParams.get('error') === '1') {
+            errorMessage.textContent = "Palavra incorreta. Tente novamente.";
+            // Limpa o parâmetro da URL para não mostrar o erro novamente no refresh
+            history.replaceState(null, '', 'gate.html'); 
+        }
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulos do Curso - DeMolay Academia</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="container">
+            <a href="index.html" class="logo">Curso Iniciático</a>
+            <nav>
+                <ul>
+                    <li><a href=https://www.demolaybrasil.org.br/institucional/Historia-da-Organizacao>Sobre a Ordem</a></li> 
+                    <li><a href="/logout" class="cta-button">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="modulos" class="section-padding" style="padding-top: 120px;">
+        <div class="container">
+            <h2> Módulos Completos</h2>
+            
+            <div class="module-list">
+                
+                <div class="module-card" id="module-1"> 
+                    <div class="module-header">
+                        <h3>01. A História e Legado</h3>
+                        <span class="expand-icon">+</span>
+                    </div>
+                    
+                    <div class="module-content" id="content-1">
+                        <p>Conheça Jacques DeMolay, a Inquisição e a fundação da Ordem. Conteúdo Essencial.</p>
+                        
+                        <div class="video-container">
+                            <iframe 
+                                src="https://www.youtube.com/embed/YOUR_VIDEO_ID_1?controls=1" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="module-card" id="module-2"> 
+                    <div class="module-header">
+                        <h3>02. As Sete Virtudes</h3>
+                        <span class="expand-icon">+</span>
+                    </div>
+                    
+                    <div class="module-content" id="content-2">
+                        <p>Exploração detalhada das Virtudes Cardeais de um DeMolay e suas aplicações práticas.</p>
+                        
+                        <div class="video-container">
+                             <iframe 
+                                src="https://www.youtube.com/embed/YOUR_VIDEO_ID_2?controls=1" 
+                                frameborder="0" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="module-card" id="module-3"> 
+                    <div class="module-header">
+                        <h3>03. Estrutura e Rituais</h3>
+                        <span class="expand-icon">+</span>
+                    </div>
+                    
+                    <div class="module-content" id="content-3">
+                        <p>Entenda o funcionamento de um Capítulo, Oficiais, e o significado dos Graus.</p>
+                        
+                        <div class="video-container">
+                             <iframe 
+                                src="https://www.youtube.com/embed/YOUR_VIDEO_ID_3?controls=1" 
+                                frameborder="0" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+                
+            </div> </div>
+    </section>
+
+    <footer id="main-footer">
+        <div class="container">
+            <p>&copy; 2025 DeMolay | Academia. Acesso Liberado. | <a href="#">Apoie a Ordem</a></p>
+        </div>
+    </footer>
+    
+    <script>
+    // Apenas o script de funcionalidades visuais (Acordeão) foi mantido
+    document.addEventListener('DOMContentLoaded', () => {
+        const moduleHeaders = document.querySelectorAll('.module-header');
+
+        moduleHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                const clickedCard = this.closest('.module-card');
+                const isActive = clickedCard.classList.contains('active');
+                
+                // Fechar todos os outros módulos
+                document.querySelectorAll('.module-card').forEach(card => {
+                    if (card !== clickedCard) {
+                        card.classList.remove('active');
+                    }
+                });
+
+                // Alternar o estado do módulo clicado
+                if (!isActive) {
+                    clickedCard.classList.add('active');
+                } else {
+                    clickedCard.classList.remove('active');
+                }
+            });
+        });
+    });
+    </script>
+
+</body>
+</html>
