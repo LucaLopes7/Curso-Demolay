@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Configuração da Sessão (AGORA USA A VARIÁVEL DE AMBIENTE)
 app.use(session({
     // Usa a variável SESSION_SECRET do arquivo .env
-    secret: SESSION_SECRET, 
+    secret:"eF2g#XpW!8qK7jR3zY@hA5tM$bV4nC6dL9sP0uI&oT%yL1sF7gH3jK5lZ9xQ2cW0vB4nE8rT6yU1iO", 
     resave: false,
     saveUninitialized: false, 
     cookie: { maxAge: 1000 * 60 * 60 * 24 } // Expira em 24 horas
