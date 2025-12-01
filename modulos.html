@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Módulos do Curso - DeMolay Academia</title>
@@ -95,8 +97,48 @@
     </footer>
     
     <script>
-    // Apenas o script de funcionalidades visuais (Acordeão) foi mantido
-    document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. CONFIGURAÇÃO (SUAS CHAVES)
+    const firebaseConfig = {
+      apiKey: "AIzaSyA2JPiiYCUQ1bURYEupC2lq68hVoI6pt4Y",
+      authDomain: "curso-demolay.firebaseapp.com",
+      projectId: "curso-demolay",
+      storageBucket: "curso-demolay.firebasestorage.app",
+      messagingSenderId: "1097564395866",
+      appId: "1:1097564395866:web:038643cccb261925ca3b63",
+      measurementId: "G-SFW9D1BXKN"
+    };
+
+    // 2. Inicializa o Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = app.auth();
+    
+    // 3. PROTEÇÃO: Monitora o estado da autenticação (SEMPRE A PRIMEIRA COISA A RODAR)
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            // USUÁRIO LOGADO: Inicia a lógica do site
+            initializeModules(); 
+        } else {
+            // USUÁRIO NÃO LOGADO: Redireciona imediatamente
+            window.location.href = 'gate.html';
+        }
+    });
+
+    // 4. FUNÇÃO DE LOGOUT
+    const logoutButton = document.querySelector('.cta-button'); 
+    if (logoutButton) {
+        logoutButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            auth.signOut().then(() => {
+                // Redirecionamento é automático pelo onAuthStateChanged acima
+            }).catch((error) => {
+                console.error("Erro ao fazer logout:", error);
+            });
+        });
+    }
+
+    // 5. FUNÇÃO QUE INICIA AS FUNCIONALIDADES VISUAIS (SÓ RODA APÓS O LOGIN)
+    function initializeModules() {
         const moduleHeaders = document.querySelectorAll('.module-header');
 
         moduleHeaders.forEach(header => {
@@ -119,8 +161,9 @@
                 }
             });
         });
-    });
-    </script>
+    }
+});
+</script>
 
 </body>
 </html>

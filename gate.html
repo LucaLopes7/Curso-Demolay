@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acesso Restrito - Palavra de Emulação</title>
@@ -75,17 +77,64 @@
     </section>
 
     <script>
-    // NOVO SCRIPT: Apenas para mostrar a mensagem de erro do servidor
-    document.addEventListener('DOMContentLoaded', () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const errorMessage = document.getElementById('message');
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. COLE SUAS CHAVES DE CONFIGURAÇÃO DO FIREBASE AQUI!
+    const firebaseConfig = {
+  apiKey: "AIzaSyA2JPiiYCUQ1bURYEupC2lq68hVoI6pt4Y",
+  authDomain: "curso-demolay.firebaseapp.com",
+  projectId: "curso-demolay",
+  storageBucket: "curso-demolay.firebasestorage.app",
+  messagingSenderId: "1097564395866",
+  appId: "1:1097564395866:web:038643cccb261925ca3b63",
+  measurementId: "G-SFW9D1BXKN"
+};
+
+    // 2. Inicializa o Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = app.auth();
+
+    const accessButton = document.querySelector('button[type="submit"]');
+    const emulationWordInput = document.getElementById('emulationWord');
+    const messageElement = document.getElementById('message');
+    
+    // 3. O E-mail fixo usado para simular a Palavra de Emulação (usado na criação do usuário no Firebase)
+    const FIXED_ACCESS_EMAIL = "demolay.acesso@curso.org"; 
+
+    // Oculta a mensagem de erro se não houver parâmetro 'error' na URL
+    if (!window.location.search.includes('error')) {
+        messageElement.textContent = "";
+    }
+    
+    // 4. AÇÃO: O que acontece quando o botão "Prosseguir" é clicado
+    accessButton.addEventListener('click', (e) => {
+        e.preventDefault(); 
         
-        if (urlParams.get('error') === '1') {
-            errorMessage.textContent = "Palavra incorreta. Tente novamente.";
-            // Limpa o parâmetro da URL para não mostrar o erro novamente no refresh
-            history.replaceState(null, '', 'gate.html'); 
+        const emulationWord = emulationWordInput.value.trim().toUpperCase();
+        
+        // Tenta logar usando o E-mail Fixo e a Palavra digitada como senha
+        auth.signInWithEmailAndPassword(FIXED_ACCESS_EMAIL, emulationWord)
+            .then((userCredential) => {
+                // SUCESSO: Redireciona para a página de módulos
+                messageElement.textContent = "Acesso Concedido! Redirecionando...";
+                window.location.href = 'modulos.html';
+            })
+            .catch((error) => {
+                // FALHA: Exibe a mensagem de erro
+                messageElement.textContent = "Palavra incorreta. Tente novamente.";
+                emulationWordInput.value = '';
+                // Você pode usar 'error.code' para debug no console:
+                // console.error("Erro de Autenticação:", error.code);
+            });
+    });
+    
+    // 5. VERIFICAÇÃO DE ESTADO: Redireciona se o usuário já estiver logado
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            window.location.href = 'modulos.html';
         }
     });
-    </script>
+
+});
+</script>
 </body>
 </html>
