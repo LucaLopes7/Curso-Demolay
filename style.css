@@ -312,77 +312,91 @@ nav ul li a:hover {
     color: var(--primary-color); 
 }
 
-
 /* ======================================= */
 /* 5. RESPONSIVIDADE (MOBILE FIRST)        */
 /* ======================================= */
 @media (max-width: 768px) {
-    /* Header e Navegação */
+    /* NOVO: Impede a rolagem horizontal causada por elementos muito largos */
+    body {
+        overflow-x: hidden;
+    }
+
+    /* O container deve ser quase total (95%) */
+    .container {
+        width: 95%;
+        padding: 0 10px; /* Adiciona um pequeno padding interno */
+    }
+
+    /* HEADER e Navegação */
     #main-header .container {
         flex-direction: column;
-        text-align: center;
+        align-items: center;
+        padding-top: 15px;
+        padding-bottom: 15px;
     }
-
+    
     nav ul {
-        margin-top: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
+        flex-direction: column; /* Empilha links verticalmente */
+        margin-top: 15px;
+        width: 100%;
     }
     
-    .cta-button {
-        margin-top: 10px;
-        margin-left: 0;
-    }
-    
-    /* 1. AJUSTES GERAIS DE CONTEÚDO */
-    .container {
-        width: 95%; /* Use mais da tela */
+    nav ul li {
+        margin: 5px 0; /* Espaçamento vertical entre os links */
     }
 
-    /* Hero Section (Index.html) */
+    .cta-button {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    
+    /* INDEX.HTML (Hero Section) */
     #hero-section h1 {
-        font-size: 2.5rem; /* Diminui o título principal */
+        font-size: 2.5rem; 
+        line-height: 1.2;
     }
     
     .subtitle {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 
     .cta-primary {
-        padding: 15px 30px;
-        font-size: 1.2rem;
-    }
-
-    /* Título das Seções (Módulos.html) */
-    .section-padding h2 {
-        font-size: 2rem;
-        margin-bottom: 40px;
+        padding: 12px 25px;
+        font-size: 1rem;
     }
     
-    /* 2. AJUSTES DO GATE (TELA DE LOGIN) */
+    /* GATE.HTML */
     .gate-box {
-        padding: 30px 20px; /* Reduz o padding da caixa de login */
-        width: 90%; /* Garante que ocupe a maior parte da tela */
+        padding: 30px 20px; 
+        width: 90%; 
     }
 
-    .gate-box input[type="password"] {
-        width: 95%; /* Usa quase a largura total da caixa */
-        padding: 12px;
+    .gate-box input[type="password"],
+    .gate-box button {
+        width: 100%; /* Ocupa a largura total da caixa */
+        padding: 15px;
     }
 
-    /* 3. AJUSTES DO ACORDEÃO (MÓDULOS) */
+    /* MODULOS.HTML (Acordeão) */
     .module-header {
-        padding: 15px 20px; /* Reduz o padding do cabeçalho do módulo */
+        padding: 15px;
     }
 
     .module-header h3 {
-        font-size: 1.2rem; /* Título do módulo menor */
-        line-height: 1.4;
+        font-size: 1.1rem; 
     }
 
-    .module-content p {
-        font-size: 0.95rem; /* Texto do módulo menor */
+    .module-content {
+        padding: 15px;
     }
+}
 
-    /* FIM DA SEÇÃO DE RESPONSIVIDADE */
+/* NOVO AJUSTE: Para telas Ultra Pequenas (Ex: 400px ou menos) */
+@media (max-width: 400px) {
+    #hero-section h1 {
+        font-size: 2rem;
+    }
+    .logo, .logo-centered {
+        font-size: 1rem;
+    }
 }
